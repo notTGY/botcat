@@ -1,7 +1,3 @@
-<style>
-	@import './global.css';
-</style>
-
 <script lang="ts">
 	import Table from './Table.svelte';
 	const urlParams = new URLSearchParams(window.location.search);
@@ -9,8 +5,11 @@
 
 	export let rowData = null
 
-	fetch(`/v/${dashboardId}`)
-		.then(res => res.json())
+	fetch(`http://localhost:3000/v/${dashboardId}`)
+		.then(res => {
+      console.log(res)
+      return res.json()
+    })
 		.then(res => {
 			rowData = res
 		})
@@ -18,7 +17,7 @@
 	const clearNotifications = () => {
 		const prevData = JSON.parse(JSON.stringify(rowData))
 		rowData = null
-		fetch(`/v/${dashboardId}`, {
+		fetch(`http://localhost:3000/v/${dashboardId}`, {
 			method: 'DELETE',
 		}).then(res => {
 			if(res.status !== 204){

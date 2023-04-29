@@ -1,6 +1,4 @@
 <script>
-    import { empty } from "svelte/internal";
-
   export let rowData = null
 </script>
 {#if rowData === null}
